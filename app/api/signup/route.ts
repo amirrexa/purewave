@@ -84,7 +84,7 @@ export async function POST(req: Request) {
         });
 
         return Response.json({ message: 'ثبت‌نام با موفقیت انجام شد' });
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Signup error:', error);
         return Response.json({ message: 'خطا در سرور' }, { status: 500 });
     } finally {

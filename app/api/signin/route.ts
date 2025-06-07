@@ -54,7 +54,7 @@ export async function POST(req: Request) {
         });
 
         return Response.json({ message: 'ورود با موفقیت انجام شد' });
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Signin error:', error);
         return Response.json({ message: 'خطا در سرور' }, { status: 500 });
     } finally {

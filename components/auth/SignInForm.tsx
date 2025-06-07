@@ -59,9 +59,17 @@ export default function SignInForm() {
 
             message.success('ورود با موفقیت انجام شد!');
             router.push('/');
-        } catch (err: any) {
-            setError(err.message);
-            message.error(err.message);
+        } catch (err: unknown) {
+            let errorMessage: string;
+            if (err instanceof Error) {
+                errorMessage = err.message;
+            } else if (typeof err === 'string') {
+                errorMessage = err;
+            } else {
+                errorMessage = 'خطای ناشناخته رخ داده است';
+            }
+            setError(errorMessage);
+            message.error(errorMessage);
         } finally {
             setLoading(false);
         }

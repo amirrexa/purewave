@@ -3,6 +3,7 @@ import Footer from '@/components/common/Footer';
 import MotionDiv from '@/components/ui/MotionDiv';
 import { FaWater, FaFilter, FaLeaf, FaStar } from 'react-icons/fa';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata = {
   title: 'موج پاک - دستگاه‌های تصفیه آب با کیفیت',
@@ -21,7 +22,7 @@ export default function Home() {
       <main>
         {/* Hero Section */}
         <section
-          className="hero relative bg-cover bg-center h-[90vh] flex items-center justify-center text-center overflow-hidden"
+          className="hero relative bg-cover bg-center flex items-center justify-center text-center overflow-hidden"
           style={{
             backgroundImage: 'url(/images/banner-hero.jpg)',
             backgroundColor: '#1E88E5',
@@ -209,7 +210,9 @@ export default function Home() {
                   className="bg-white rounded-lg shadow-md overflow-hidden"
                 >
                   <div className="h-48 bg-gray-200">
-                    <img
+                    <Image
+                      width={300}
+                      height={200}
                       src={product.image}
                       alt={product.name}
                       className="w-full h-full object-cover"
@@ -276,10 +279,10 @@ export default function Home() {
                 >
                   <div className="flex justify-center mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <FaStar key={i} className="text-yellow-400 text-xl" />
+                      <FaStar key={i} className='text-yellow-400 text-xl' />
                     ))}
                   </div>
-                  <p className="text-gray-600 italic mb-4">"{testimonial.quote}"</p>
+                  <p className="text-gray-600 italic mb-4">&quot;{testimonial.quote}&quot;</p>
                   <h4 className="text-lg font-semibold text-[var(--color-dark)]">
                     {testimonial.name}
                   </h4>

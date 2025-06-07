@@ -3,6 +3,7 @@ import './globals.css';
 import Script from 'next/script';
 import { ConfigProvider } from 'antd';
 import faIR from 'antd/lib/locale/fa_IR';
+import '@ant-design/v5-patch-for-react-19';
 
 export const metadata: Metadata = {
   title: {
@@ -97,14 +98,21 @@ export default function RootLayout({
         <meta name="theme-color" content="#1E88E5" />
         {/* Structured Data (JSON-LD) */}
         <Script
+          id="structured-data"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
       <ConfigProvider locale={faIR} direction='rtl' theme={{
         token: {
-          fontFamily: 'Vazir'
-        }
+          fontFamily: 'Vazir',
+          colorPrimary: '#26A69A',
+        },
+        components: {
+          Button: {
+            colorPrimary: '#26A69A',
+          },
+        },
       }}>
         <body className="font-vazir">{children}</body>
       </ConfigProvider>

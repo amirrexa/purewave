@@ -3,8 +3,8 @@ import MotionDiv from '@/components/ui/MotionDiv';
 
 export default function Navbar() {
     return (
-        <nav className="sticky top-0 z-50 bg-white/30 backdrop-blur-lg shadow-sm">
-            <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <nav className="sticky top-0 z-50 bg-white/30 h-18 flex items-center backdrop-blur-lg shadow-sm">
+            <div className="container mx-auto px-4 flex justify-between items-center">
                 {/* Logo */}
                 <MotionDiv
                     initial={{ opacity: 0, y: -20 }}

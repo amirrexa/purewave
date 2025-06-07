@@ -67,10 +67,19 @@ export default function SignUpForm() {
 
             message.success('ثبت‌نام با موفقیت انجام شد! لطفاً وارد شوید.');
             router.push('/signin');
-        } catch (err: any) {
-            setError(err.message);
-            message.error(err.message);
-        } finally {
+        } catch (err: unknown) {
+            let errorMessage: string;
+            if (err instanceof Error) {
+                errorMessage = err.message;
+            } else if (typeof err === 'string') {
+                errorMessage = err;
+            } else {
+                errorMessage = 'خطای ناشناخته رخ داده است';
+            }
+            setError(errorMessage);
+            message.error(errorMessage);
+        }
+        finally {
             setLoading(false);
         }
     };
