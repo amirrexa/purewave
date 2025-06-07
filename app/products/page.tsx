@@ -9,7 +9,6 @@ import { Row, Col, Select, Card, Divider, Button as AntdButton, Tag } from 'antd
 import { FaFilter } from 'react-icons/fa';
 import { SortOption } from './sort.enum';
 import Image from 'next/image';
-import { Button } from '@/components/ui/Button';
 
 interface Product {
     id: string;
@@ -113,21 +112,21 @@ export default function ProductsPage() {
 
                     <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
                         <div className="flex gap-2 flex-wrap">
-                            <Button
+                            <AntdButton
                                 key="0"
                                 onClick={() => setSelectedCategoryId('0')}
                                 className={selectedCategoryId === '0' ? 'bg-[var(--color-accent)] text-white' : ''}
                             >
                                 همه
-                            </Button>
+                            </AntdButton>
                             {categories.map((category) => (
-                                <Button
+                                <AntdButton
                                     key={category.id}
                                     onClick={() => setSelectedCategoryId(category.id)}
                                     className={selectedCategoryId === category.id ? 'bg-[var(--color-accent)] text-white' : ''}
                                 >
                                     {category.name}
-                                </Button>
+                                </AntdButton>
                             ))}
                         </div>
                         <div className="flex items-center gap-2">

@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { ConfigProvider } from 'antd';
 import faIR from 'antd/lib/locale/fa_IR';
 import '@ant-design/v5-patch-for-react-19';
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 export const metadata: Metadata = {
   title: {
@@ -103,19 +104,21 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <ConfigProvider locale={faIR} direction='rtl' theme={{
-        token: {
-          fontFamily: 'Vazir',
-          colorPrimary: '#26A69A',
-        },
-        components: {
-          Button: {
+      <AntdRegistry>
+        <ConfigProvider locale={faIR} direction='rtl' theme={{
+          token: {
+            fontFamily: 'Vazir',
             colorPrimary: '#26A69A',
           },
-        },
-      }}>
-        <body className="font-vazir">{children}</body>
-      </ConfigProvider>
+          components: {
+            Button: {
+              colorPrimary: '#26A69A',
+            },
+          },
+        }}>
+          <body className="font-vazir">{children}</body>
+        </ConfigProvider>
+      </AntdRegistry>
     </html>
   );
 }
