@@ -215,7 +215,7 @@ export default function Home() {
                       height={200}
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
                   </div>
                   <div className="p-6">
@@ -265,9 +265,9 @@ export default function Home() {
             </MotionDiv>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                { name: 'علی محمدی', quote: 'دستگاه تصفیه آب کیفیت عالی داره!', rating: 5 },
-                { name: 'سارا احمدی', quote: 'پمپ آب نصب آسانی داشت و کارآمد بود.', rating: 4 },
-                { name: 'حسن رضایی', quote: 'خدمات پس از فروش برای هر دو محصول فوق‌العاده‌ست.', rating: 5 },
+                { name: 'علی محمدی', quote: 'دستگاه تصفیه آب کیفیت عالی داره:quot;', rating: 5 },
+                { name: 'سارا احمدی', quote: 'پمپ آب نصب آسانی داشت و کارآمد بود:quot;', rating: 4 },
+                { name: 'حسن رضایی', quote: 'خدمات پس از فروش برای هر دو محصول فوق‌العاده‌ست:quot;', rating: 5 },
               ].map((testimonial, index) => (
                 <MotionDiv
                   key={index}
@@ -282,7 +282,7 @@ export default function Home() {
                       <FaStar key={i} className="text-yellow-400 text-xl" />
                     ))}
                   </div>
-                  <p className="text-gray-600 italic mb-4">"{testimonial.quote}"</p>
+                  <p className="text-gray-600 italic mb-4">&quot;{testimonial.quote}&quot;</p>
                   <h4 className="text-lg font-semibold text-[var(--color-dark)]">
                     {testimonial.name}
                   </h4>
