@@ -4,15 +4,15 @@ import Script from 'next/script';
 import { ConfigProvider } from 'antd';
 import faIR from 'antd/lib/locale/fa_IR';
 import '@ant-design/v5-patch-for-react-19';
-import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { AntdRegistry } from '@ant-design/nextjs-registry';
 
 export const metadata: Metadata = {
   title: {
-    default: 'موج پاک - دستگاه‌های تصفیه آب با کیفیت',
+    default: 'موج پاک - دستگاه‌های تصفیه آب و پمپ‌های با کیفیت',
     template: '%s | موج پاک',
   },
-  description: 'خرید دستگاه‌های تصفیه آب با کیفیت بالا برای آب پاک و سالم در خانه و کسب‌وکار شما با موج پاک.',
-  keywords: ['تصفیه آب', 'دستگاه تصفیه آب', 'آب پاک', 'موج پاک', 'فیلتر آب', 'سلامتی', 'تجهیزات خانگی'],
+  description: 'خرید دستگاه‌های تصفیه آب و پمپ‌های با کیفیت بالا برای آب پاک، سالم و جریان در خانه و کسب‌وکار شما با موج پاک.',
+  keywords: ['تصفیه آب', 'پمپ آب', 'دستگاه تصفیه آب', 'آب پاک', 'موج پاک', 'فیلتر آب', 'سلامتی', 'تجهیزات خانگی'],
   authors: [{ name: 'تیم موج پاک', url: 'https://mojepak.ir' }],
   robots: {
     index: true,
@@ -36,14 +36,14 @@ export const metadata: Metadata = {
     locale: 'fa_IR',
     url: 'https://mojepak.ir',
     siteName: 'موج پاک',
-    title: 'موج پاک - دستگاه‌های تصفیه آب با کیفیت',
-    description: 'خرید دستگاه‌های تصفیه آب با کیفیت بالا برای آب پاک و سالم در خانه و کسب‌وکار شما.',
+    title: 'موج پاک - دستگاه‌های تصفیه آب و پمپ‌های با کیفیت',
+    description: 'خرید دستگاه‌های تصفیه آب و پمپ‌های با کیفیت بالا برای آب پاک، سالم و جریان در خانه و کسب‌وکار شما.',
     images: [
       {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'دستگاه تصفیه آب موج پاک',
+        alt: 'دستگاه تصفیه آب و پمپ موج پاک',
       },
     ],
   },
@@ -51,8 +51,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@Mojepak',
     creator: '@Mojepak',
-    title: 'موج پاک - دستگاه‌های تصفیه آب با کیفیت',
-    description: 'خرید دستگاه‌های تصفیه آب با کیفیت بالا برای آب پاک و سالم در خانه و کسب‌وکار شما.',
+    title: 'موج پاک - دستگاه‌های تصفیه آب و پمپ‌های با کیفیت',
+    description: 'خرید دستگاه‌های تصفیه آب و پمپ‌های با کیفیت بالا برای آب پاک، سالم و جریان در خانه و کسب‌وکار شما.',
     images: '/images/og-image.jpg',
   },
   icons: {
@@ -73,7 +73,7 @@ export default function RootLayout({
     name: 'موج پاک',
     url: 'https://mojepak.ir',
     logo: 'https://mojepak.ir/images/logo.png',
-    description: 'موج پاک ارائه‌دهنده دستگاه‌های تصفیه آب با کیفیت بالا برای آب پاک و سالم در خانه و کسب‌وکار شما.',
+    description: 'موج پاک ارائه‌دهنده دستگاه‌های تصفیه آب و پمپ‌های با کیفیت بالا برای آب پاک، سالم و جریان در خانه و کسب‌وکار شما.',
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+98-21-12345678',

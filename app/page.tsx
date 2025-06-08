@@ -6,11 +6,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata = {
-  title: 'موج پاک - دستگاه‌های تصفیه آب با کیفیت',
-  description: 'خرید دستگاه‌های تصفیه آب با کیفیت بالا برای آب پاک و سالم در خانه و کسب‌وکار شما.',
+  title: 'موج پاک - دستگاه‌های تصفیه آب و پمپ‌های با کیفیت',
+  description: 'خرید دستگاه‌های تصفیه آب و پمپ‌های با کیفیت بالا برای آب پاک، سالم و جریان در خانه و کسب‌وکار شما.',
   openGraph: {
     title: 'موج پاک',
-    description: 'دستگاه‌های تصفیه آب با کیفیت برای زندگی سالم.',
+    description: 'دستگاه‌های تصفیه آب و پمپ‌های با کیفیت برای زندگی سالم و جریان آب.',
     images: ['/images/og-image.jpg'],
   },
 };
@@ -75,7 +75,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-lg md:text-2xl mb-8 text-white font-light"
             >
-              <p>تصفیه آب با فناوری پیشرفته برای خانه و کسب‌وکار شما</p>
+              <p>تصفیه آب و پمپاژ با فناوری پیشرفته برای خانه و کسب‌وکار شما</p>
             </MotionDiv>
             <MotionDiv
               initial={{ opacity: 0, y: 50 }}
@@ -119,7 +119,7 @@ export default function Home() {
                 چرا موج پاک؟
               </h2>
               <p className="text-lg text-gray-600">
-                ویژگی‌های برجسته دستگاه‌های تصفیه آب ما
+                ویژگی‌های برجسته دستگاه‌های تصفیه آب و پمپ‌های ما
               </p>
             </MotionDiv>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -154,7 +154,7 @@ export default function Home() {
                   سازگار با محیط زیست
                 </h3>
                 <p className="text-gray-600">
-                  کاهش مصرف پلاستیک با طراحی پایدار
+                  کاهش مصرف پلاستیک و انرژی در پمپ‌ها و دستگاه‌ها
                 </p>
               </MotionDiv>
               <MotionDiv
@@ -168,10 +168,10 @@ export default function Home() {
                   <FaWater className="text-4xl text-[var(--color-primary)]" />
                 </div>
                 <h3 className="text-xl font-semibold text-[var(--color-dark)] mb-2">
-                  آب خالص و گوارا
+                  آب خالص و جریان پایدار
                 </h3>
                 <p className="text-gray-600">
-                  طعم طبیعی آب با حفظ مواد معدنی ضروری
+                  طعم طبیعی آب و پمپاژ قدرتمند با حفظ کیفیت
                 </p>
               </MotionDiv>
             </div>
@@ -192,13 +192,13 @@ export default function Home() {
                 محصولات برتر ما
               </h2>
               <p className="text-lg text-gray-600">
-                دستگاه‌های تصفیه آب با کیفیت برای هر نیاز
+                دستگاه‌های تصفیه آب و پمپ‌های با کیفیت برای هر نیاز
               </p>
             </MotionDiv>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 { name: 'دستگاه خانگی مدل A1', price: '۲,۵۰۰,۰۰۰ تومان', image: '/images/product-a1.jpg' },
-                { name: 'دستگاه صنعتی مدل B2', price: '۵,۰۰۰,۰۰۰ تومان', image: '/images/product-b2.jpg' },
+                { name: 'پمپ صنعتی مدل P2', price: '۴,۵۰۰,۰۰۰ تومان', image: '/images/product-p2.jpg' },
                 { name: 'فیلتر جایگزین مدل C3', price: '۵۰۰,۰۰۰ تومان', image: '/images/product-c3.jpg' },
               ].map((product, index) => (
                 <MotionDiv
@@ -260,14 +260,14 @@ export default function Home() {
                 نظرات مشتریان
               </h2>
               <p className="text-lg text-gray-600">
-                تجربه کاربران از محصولات موج پاک
+                تجربه کاربران از دستگاه‌های تصفیه آب و پمپ‌های موج پاک
               </p>
             </MotionDiv>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                { name: 'علی محمدی', quote: 'این دستگاه کیفیت آب خانه ما را متحول کرد!', rating: 5 },
-                { name: 'سارا احمدی', quote: 'نصب آسان و عملکرد عالی، بسیار راضی هستم.', rating: 4 },
-                { name: 'حسن رضایی', quote: 'فیلترهای باکیفیت و خدمات پس از فروش فوق‌العاده.', rating: 5 },
+                { name: 'علی محمدی', quote: 'دستگاه تصفیه آب کیفیت عالی داره!', rating: 5 },
+                { name: 'سارا احمدی', quote: 'پمپ آب نصب آسانی داشت و کارآمد بود.', rating: 4 },
+                { name: 'حسن رضایی', quote: 'خدمات پس از فروش برای هر دو محصول فوق‌العاده‌ست.', rating: 5 },
               ].map((testimonial, index) => (
                 <MotionDiv
                   key={index}
@@ -279,10 +279,10 @@ export default function Home() {
                 >
                   <div className="flex justify-center mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <FaStar key={i} className='text-yellow-400 text-xl' />
+                      <FaStar key={i} className="text-yellow-400 text-xl" />
                     ))}
                   </div>
-                  <p className="text-gray-600 italic mb-4">&quot;{testimonial.quote}&quot;</p>
+                  <p className="text-gray-600 italic mb-4">"{testimonial.quote}"</p>
                   <h4 className="text-lg font-semibold text-[var(--color-dark)]">
                     {testimonial.name}
                   </h4>
@@ -302,10 +302,10 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                آب پاک را امروز تجربه کنید!
+                آب پاک و جریان را امروز تجربه کنید!
               </h2>
               <p className="text-lg mb-8">
-                با موج پاک، سلامتی و خلوص آب را به خانه خود بیاورید.
+                با موج پاک، سلامتی و خلوص آب و پمپاژ قدرتمند را به خانه خود بیاورید.
               </p>
               <MotionDiv
                 whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(255, 255, 255, 0.3)' }}
