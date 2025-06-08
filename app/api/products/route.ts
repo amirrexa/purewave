@@ -8,7 +8,6 @@ export async function GET(request: Request) {
     const categoryId = searchParams.get('categoryId');
     const sort = searchParams.get('sort') || 'newest';
 
-    // Initialize orderBy with proper type
     const orderBy: Prisma.ProductOrderByWithRelationInput = { createdAt: 'desc' };
     switch (sort) {
         case 'cheapest':
@@ -38,27 +37,11 @@ export async function GET(request: Request) {
             image: true,
             createdAt: true,
             features: true,
-            brand: {
-                select: {
-                    id: true,
-                    name: true,
-                },
-            },
-            category: {
-                select: {
-                    id: true,
-                    name: true,
-                },
-            },
+            brandId: true,
+            categoryId: true,
+            classificationId: true,
         },
     });
 
-    const categories = await prisma.category.findMany({
-        select: {
-            id: true,
-            name: true,
-        },
-    });
-
-    return NextResponse.json({ products, categories });
+    return NextResponse.json(products);
 }

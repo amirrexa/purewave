@@ -15,52 +15,63 @@ enum Role {
 model User {
   id          String   @id @default(uuid())
   phoneNumber String   @unique
-  email       String?  @unique // Optional, for future email-based login
-  name        String?  // Optional, for user’s full name
+  email       String?  @unique
+  name        String?
   password    String
-  role        Role     @default(USER) // Default to USER
-  isActive    Boolean  @default(true) // For soft-deleting or deactivating users
+  role        Role     @default(USER)
+  isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
 model Brand {
   id          String    @id @default(uuid())
-  name        String    @unique // e.g., "AquaPure"
-  description String?   // Optional description of the brand
-  logo        String?   // Optional URL to the brand’s logo
+  name        String    @unique
+  description String?
+  logo        String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  products    Product[] // One-to-many relationship with Product
+  products    Product[]
 }
 
 model Category {
   id          String    @id @default(uuid())
-  name        String    @unique // e.g., "خانگی"
-  description String?   // Optional description of the category
+  name        String    @unique
+  description String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  products    Product[] // One-to-many relationship with Product
+  products    Product[]
+}
+
+model Classification {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
 }
 
 model Product {
-  id           String    @id @default(uuid())
-  name         String    // e.g., "دستگاه خانگی مدل A1"
-  description  String    // Product description
-  price        Float     // Price in local currency
-  discount     Float?    // Optional discount percentage (e.g., 10 for 10%)
-  image        String    // URL to the main product image
-  images       String[]  // Array of additional image URLs
-  brandId      String    // Foreign key to Brand
-  brand        Brand     @relation(fields: [brandId], references: [id])
-  categoryId   String    // Foreign key to Category
-  category     Category  @relation(fields: [categoryId], references: [id])
-  stock        Int       // Number of items in stock
-  sku          String    @unique // Stock Keeping Unit for inventory tracking
-  weight       Float?    // Optional weight in kg (for shipping)
-  dimensions   String?   // Optional dimensions (e.g., "20x30x40 cm")
-  features     String[]  // Array of features (e.g., ["فیلتر نانو", "کم مصرف"])
-  isAvailable  Boolean   @default(true) // Availability status
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  id               String    @id @default(uuid())
+  name             String
+  description      String
+  price            Float
+  discount         Float?
+  image            String
+  images           String[]
+  brandId          String
+  brand            Brand     @relation(fields: [brandId], references: [id])
+  categoryId       String
+  category         Category  @relation(fields: [categoryId], references: [id])
+  classificationId String
+  classification   Classification @relation(fields: [classificationId], references: [id])
+  stock            Int
+  sku              String    @unique
+  weight           Float?
+  dimensions       String?
+  features         String[]
+  isAvailable      Boolean   @default(true)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
 }

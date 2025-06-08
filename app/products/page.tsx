@@ -1,3 +1,4 @@
+// app/products/page.tsx
 'use client';
 
 import MotionDiv from '@/components/ui/MotionDiv';
@@ -5,7 +6,7 @@ import Navbar from '@/components/common/Navbar';
 import Footer from '@/components/common/Footer';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Row, Col, Select, Card, Divider, Button as AntdButton, Tag } from 'antd';
+import { Row, Col, Select, Card, Divider, Button as AntdButton, Tag, Spin } from 'antd';
 import { FaFilter } from 'react-icons/fa';
 import { SortOption } from './sort.enum';
 import Image from 'next/image';
@@ -19,11 +20,22 @@ interface Product {
     image: string;
     features: string[];
     createdAt: Date;
-    brand: { id: string; name: string };
-    category: { id: string; name: string };
+    brandId: string;
+    categoryId: string;
+    classificationId: string; // Updated to match Classification
 }
 
 interface Category {
+    id: string;
+    name: string;
+}
+
+interface Brand {
+    id: string;
+    name: string;
+}
+
+interface Classification {
     id: string;
     name: string;
 }
@@ -32,41 +44,57 @@ export default function ProductsPage() {
     const [products, setProducts] = useState<Product[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
+    const [brands, setBrands] = useState<Brand[]>([]);
+    const [classifications, setClassifications] = useState<Classification[]>([]);
     const [selectedCategoryId, setSelectedCategoryId] = useState('0');
+    const [selectedBrandId, setSelectedBrandId] = useState('0');
+    const [selectedClassificationId, setSelectedClassificationId] = useState('0');
     const [sortOption, setSortOption] = useState(SortOption.Newest);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
+        // Fetch products
         fetch('/api/products')
             .then((res) => res.json())
-            .then((data) => {
-                const mappedProducts = data.products.map((product: Product) => ({
-                    id: product.id,
-                    name: product.name,
-                    description: product.description,
-                    price: product.price,
-                    discount: product.discount,
-                    image: product.image,
-                    features: product.features,
-                    createdAt: new Date(product.createdAt),
-                    brand: { id: product.brand.id, name: product.brand.name },
-                    category: { id: product.category.id, name: product.category.name },
-                }));
-                const mappedCategories = data.categories.map((category: Category) => ({
-                    id: category.id,
-                    name: category.name,
-                }));
-                setProducts(mappedProducts);
-                setCategories(mappedCategories);
-                setFilteredProducts(mappedProducts);
-            })
+            .then((data: Product[]) => setProducts(data))
             .catch((error) => console.error('Error fetching products:', error));
+
+        // Fetch categories
+        fetch('/api/categories')
+            .then((res) => res.json())
+            .then((data: Category[]) => setCategories(data))
+            .catch((error) => console.error('Error fetching categories:', error));
+
+        // Fetch brands
+        fetch('/api/brands')
+            .then((res) => res.json())
+            .then((data: Brand[]) => setBrands(data))
+            .catch((error) => console.error('Error fetching brands:', error));
+
+        // Fetch classifications
+        fetch('/api/classifications')
+            .then((res) => res.json())
+            .then((data: Classification[]) => setClassifications(data))
+            .catch((error) => console.error('Error fetching classifications:', error))
+            .finally(() => setLoading(false));
     }, []);
 
     useEffect(() => {
         let updatedProducts = [...products];
+        if (selectedClassificationId !== '0') {
+            updatedProducts = updatedProducts.filter(
+                (product) => product.classificationId === selectedClassificationId
+            );
+        }
         if (selectedCategoryId !== '0') {
             updatedProducts = updatedProducts.filter(
-                (product) => product.category.id === selectedCategoryId
+                (product) => product.categoryId === selectedCategoryId
+            );
+        }
+        if (selectedBrandId !== '0') {
+            updatedProducts = updatedProducts.filter(
+                (product) => product.brandId === selectedBrandId
             );
         }
         switch (sortOption) {
@@ -82,7 +110,15 @@ export default function ProductsPage() {
                 break;
         }
         setFilteredProducts(updatedProducts);
-    }, [selectedCategoryId, sortOption, products]);
+    }, [selectedClassificationId, selectedCategoryId, selectedBrandId, sortOption, products]);
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <Spin size="large" />
+            </div>
+        );
+    }
 
     return (
         <div dir="rtl" className="font-vazir min-h-screen">
@@ -96,9 +132,9 @@ export default function ProductsPage() {
                         className="text-center mb-12"
                     >
                         <h1 className="text-3xl md:text-4xl font-bold text-[var(--color-dark)] mb-4">
-                            محصولات تصفیه آب
+                            محصولات تصفیه آب و پمپ
                         </h1>
-                        <p className="text-lg text-gray-600 mb-6">دستگاه‌های با کیفیت برای آب پاک و سالم</p>
+                        <p className="text-lg text-gray-600 mb-6">دستگاه‌ها و پمپ‌های با کیفیت برای آب پاک و جریان</p>
                         <Divider
                             style={{
                                 borderColor: 'var(--color-accent)',
@@ -114,8 +150,26 @@ export default function ProductsPage() {
                         <div className="flex gap-2 flex-wrap">
                             <AntdButton
                                 key="0"
+                                onClick={() => setSelectedClassificationId('0')}
+                                type={selectedClassificationId === '0' ? 'primary' : 'default'}
+                            >
+                                همه
+                            </AntdButton>
+                            {classifications.map((classification) => (
+                                <AntdButton
+                                    key={classification.id}
+                                    onClick={() => setSelectedClassificationId(classification.id)}
+                                    type={selectedClassificationId === classification.id ? 'primary' : 'default'}
+                                >
+                                    {classification.name}
+                                </AntdButton>
+                            ))}
+                        </div>
+                        <div className="flex gap-2 flex-wrap">
+                            <AntdButton
+                                key="0"
                                 onClick={() => setSelectedCategoryId('0')}
-                                className={selectedCategoryId === '0' ? 'bg-[var(--color-accent)] text-white' : ''}
+                                type={selectedCategoryId === '0' ? 'primary' : 'default'}
                             >
                                 همه
                             </AntdButton>
@@ -123,9 +177,26 @@ export default function ProductsPage() {
                                 <AntdButton
                                     key={category.id}
                                     onClick={() => setSelectedCategoryId(category.id)}
-                                    className={selectedCategoryId === category.id ? 'bg-[var(--color-accent)] text-white' : ''}
+                                    type={selectedCategoryId === category.id ? 'primary' : 'default'}
                                 >
                                     {category.name}
+                                </AntdButton>
+                            ))}
+                        </div>
+                        <div className="flex gap-2">
+                            <AntdButton
+                                onClick={() => setSelectedBrandId('0')}
+                                type={selectedBrandId === '0' ? 'primary' : 'default'}
+                            >
+                                همه برندها
+                            </AntdButton>
+                            {brands.map((brand) => (
+                                <AntdButton
+                                    key={brand.id}
+                                    onClick={() => setSelectedBrandId(brand.id)}
+                                    type={selectedBrandId === brand.id ? 'primary' : 'default'}
+                                >
+                                    {brand.name}
                                 </AntdButton>
                             ))}
                         </div>
@@ -146,7 +217,7 @@ export default function ProductsPage() {
 
                     <Row gutter={[24, 24]}>
                         {filteredProducts.length === 0 ? (
-                            <div className="text-center text-gray-600 py-12">
+                            <div className="text-center text-gray-600 py-12 col-span-full">
                                 محصولی یافت نشد. لطفاً فیلترها را تغییر دهید.
                             </div>
                         ) : (
@@ -194,7 +265,12 @@ export default function ProductsPage() {
                                                     ))}
                                                 </div>
                                                 <p className="text-sm text-gray-500 mb-2">
-                                                    <span className="font-medium">برند: </span>{product.brand.name} | <span className="font-medium">دسته‌بندی: </span>{product.category.name}
+                                                    <span className="font-medium">برند: </span>
+                                                    {brands.find((b) => b.id === product.brandId)?.name || 'نامشخص'} |{' '}
+                                                    <span className="font-medium">دسته‌بندی: </span>
+                                                    {categories.find((c) => c.id === product.categoryId)?.name || 'نامشخص'} |{' '}
+                                                    <span className="font-medium">نوع: </span>
+                                                    {classifications.find((c) => c.id === product.classificationId)?.name || 'نامشخص'}
                                                 </p>
                                                 <div className="flex items-baseline gap-2">
                                                     {product.discount ? (
@@ -232,8 +308,7 @@ export default function ProductsPage() {
                                         </Card>
                                     </MotionDiv>
                                 </Col>
-                            ))
-                        )}
+                            )))}
                     </Row>
                 </div>
             </main>
